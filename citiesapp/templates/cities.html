@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container my-5">
+      <div class="row justify-content-center">
+        {% for city in cities %}
+        <div class="col-12 col-md-6 col-lg-4 my-3">
+          <div class="card shadow-lg">
+            <img src="{{ city.image.url }}" class="card-img-top float-start" />
+            <div class="card-body">
+              <h5 class="card-title">{{ city.name }}</h5>
+              <h5 class="card-title">{{ city.country }}</h5>
+              <p class="card-text">{{ city.description | slice:"150" }}</p>
+              <a class="btn btn-dark text-dark" style="background-color: #0fd28a;" href="{% url 'city' id=city.id %}">Leer mas</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+{% endblock %}
