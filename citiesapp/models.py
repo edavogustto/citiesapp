@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django_countries.fields import CountryField
+from django.contrib.auth.models import User
 
 class City(models.Model):
     name = models.CharField(max_length=100)
@@ -18,3 +19,14 @@ class City(models.Model):
 
     class Meta:
         verbose_name_plural = 'Cities'
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.text
+
